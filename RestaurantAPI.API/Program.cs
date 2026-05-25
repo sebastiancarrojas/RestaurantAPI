@@ -15,9 +15,11 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 // ── Repositories ──
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 
 // ── Services ──
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 // ── AutoMapper ──
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

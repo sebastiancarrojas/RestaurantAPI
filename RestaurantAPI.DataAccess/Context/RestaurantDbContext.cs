@@ -15,6 +15,7 @@ public class RestaurantDbContext : DbContext
     public DbSet<Table> Tables { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<Restaurant> Restaurants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,5 +44,16 @@ public class RestaurantDbContext : DbContext
             .HasOne(r => r.Order)
             .WithOne(o => o.Reservation)
             .HasForeignKey<Order>(o => o.ReservationId);
+
+        //Restaurant
+        modelBuilder.Entity<Restaurant>(entity =>
+        {
+            entity.HasKey(r => r.Id);
+            entity.Property(r => r.Name).IsRequired().HasMaxLength(100);
+            entity.Property(r => r.Address).HasMaxLength(200);
+            entity.Property(r => r.Phone).HasMaxLength(20);
+            entity.Property(r => r.Email).HasMaxLength(100);
+            entity.HasIndex(r => r.Name).IsUnique();
+        });
     }
 }

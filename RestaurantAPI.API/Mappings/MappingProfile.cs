@@ -12,5 +12,8 @@ public class MappingProfile : Profile
         CreateMap<CustomerRequestDto, Customer>();
         CreateMap<Customer, CustomerResponseDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
+        CreateMap<RestaurantRequestDTO, Restaurant>();
+        CreateMap<Restaurant, RestaurantResponseDTO>();
     }
 }
